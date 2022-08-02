@@ -1,12 +1,15 @@
 import { useEffect } from "react";
-
-import { getBrowseByID, getBrowseCategories } from "services/spotify/api/browse/browse";
+import { getFeaturedPlaylists } from "services/spotify/api/playlist/playlist";
+  
 
 
 function Home() {
 
     async function test() {
-        const res = await getBrowseCategories();
+        // const res = await getBrowseCategories();
+        // const res = await getCurrentUserprofile();
+        // const res = await getUserProfileByID("6lrt7LngdzxaQtLIXMraSR");
+        const res = await getFeaturedPlaylists()
         // const res2 = await getBrowseByID("toplists");
 
         console.log(res)

@@ -18,7 +18,7 @@ const getToken = async () => {
     if(!content) return console.log("getToken: Data is:", content) 
     const { access_token, expires_in, token_type } = content;
 
-    const expiry = Date.now() + expires_in * 820000 - 100;
+    const expiry = Date.now() + expires_in * 1000 - 100;
     localStorage.setItem('tokenExpiry', expiry);
 
     const result = `${token_type} ${access_token}`;

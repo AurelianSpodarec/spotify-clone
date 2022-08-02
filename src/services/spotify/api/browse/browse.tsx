@@ -3,17 +3,17 @@
 import SpotifyRequest from "services/spotify/requests/request";
 
 
-async function getBrowseCategories() {
-    const data = await SpotifyRequest("browse/categories", "GET")
-    return data.categories
+async function getNewReleases() {
+    const data = await SpotifyRequest('browse/new-releases', "GET")
+    return data
 }
 
-async function getBrowseByID(id:string) {
-    const data = await SpotifyRequest(`browse/categories/${id}`, "GET")
+async function getRecommendations() {
+    const data = await SpotifyRequest('recommendations', "GET")
     return data
 }
 
 export {
-    getBrowseCategories,
-    getBrowseByID
+    getNewReleases,
+    getRecommendations
 }
