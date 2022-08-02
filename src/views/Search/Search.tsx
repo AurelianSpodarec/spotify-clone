@@ -76,8 +76,13 @@ function Search() {
             )
         } else {
             return (
-                <div key={key} className="text-white">
-                    {item.name}
+                <div key={key} className="text-white bg-green-700">
+                <a href={item.href}>
+
+                    <img src={item.icons[0].url} alt={item.name} />
+                    <h3>{item.name}</h3>
+
+                </a>
                 </div>
             )    
         }
@@ -94,7 +99,7 @@ function Search() {
                     />
                 )
             })
-        } else if (categoriesFetchStatus === "success") {
+        } else if (categoriesFetchStatus === "success") {//@ts-ignore
             return categories && categories.items.map((category:{}, index:number) => {
                 return (
                     <RenderCategoryItem 
@@ -119,7 +124,7 @@ function Search() {
             
 
 
-            <section>
+            <section className="px-8">
                 <div>
                     <h2>Browse All</h2>
                 </div>
