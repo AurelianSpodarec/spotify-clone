@@ -38,5 +38,6 @@ export {
     getSeveralEpisodes,
     getUserSavedEpisodes,
     saveEpisodesForUser,
-    deleteEpisodesForUser
+    deleteEpisodesForUser,
+    checkUserSavedEpisodes
 }

@@ -4,6 +4,9 @@ import { getBrowseCategories, getBrowseCategoryByID } from "services/spotify/api
 import { getAvailableGenreSeeds } from "services/spotify/api/genre/genre";
 import { getCategoriesPlaylists, getFeaturedPlaylists, getPlaylist } from "services/spotify/api/playlist/playlist";
   
+// Original URL: https://open.spotify.com/search
+//=========================================================
+
 
   // TASK: 
     // 1. Output browse/categories
@@ -27,7 +30,7 @@ const SUB_CATEGORIES_LIST_STATES = {
     failure: 'failure',
 }
 
-function Home() {
+function Search() {
     const test = useSelector((state:any) => state.categories)
 
     const [categories, setCategories] = useState([])
@@ -73,7 +76,7 @@ function Home() {
             )
         } else {
             return (
-                <div key={key}>
+                <div key={key} className="text-white">
                     {item.name}
                 </div>
             )    
@@ -84,7 +87,12 @@ function Home() {
     function RenderCategoriesListing() {
         if(categoriesFetchStatus === "fetching") {
             return [...Array(9)].map((_, index) => {
-                return <RenderCategoryItem key={index} fetchStatus={categoriesFetchStatus} />
+                return (
+                    <RenderCategoryItem 
+                        key={index} 
+                        fetchStatus={categoriesFetchStatus} 
+                    />
+                )
             })
         } else if (categoriesFetchStatus === "success") {
             return categories && categories.items.map((category:{}, index:number) => {
@@ -108,21 +116,20 @@ function Home() {
 
     return (
         <div className="">
-            <RenderCategoriesListing />
+            
 
 
             <section>
                 <div>
-                    <h2>Hot Right now</h2>
-                    <button>See All</button>
+                    <h2>Browse All</h2>
                 </div>
 
-                <div>
-                    List
+                <div className="grid grid-cols-6">
+                    <RenderCategoriesListing />
                 </div>
             </section>
         </div>
     )
 }
 
-export default Home;
+export default Search;

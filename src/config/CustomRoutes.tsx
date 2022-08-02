@@ -3,6 +3,7 @@ import { useRoutes } from "react-router-dom";
 
 import Home from "views/Home";
 import NotFound from "views/NotFound/NotFound";
+import Search from "views/Search/Search";
 
 function CustomRoutes() {
     let element = useRoutes([
@@ -13,6 +14,10 @@ function CustomRoutes() {
         {
             path: "/",
             element: <Home />
+        },
+        {
+            path: "/search",
+            element: <Search />
         }
     ]);
 
