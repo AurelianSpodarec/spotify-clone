@@ -1,5 +1,6 @@
 import * as React from "react";
 import { useRoutes } from "react-router-dom";
+import Artist from "views/Artists/Artist/Artist";
 
 import Artists from "views/Artists/Artists";
 import Genre from "views/Genre/Genre";
@@ -26,6 +27,10 @@ function CustomRoutes() {
         {
             path: "/artists",
             element: <Artists />
+        },
+        {
+            path: "/artist/:id",
+            element: <Artist />
         },
         {
             path: "/genre",
