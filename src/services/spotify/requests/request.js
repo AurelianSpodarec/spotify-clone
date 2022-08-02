@@ -8,7 +8,7 @@ import {
  
 
 const SpotifyRequest = async function (endpoint, method, data) {
-
+    
     const params = { locale: 'gb_GB', country: 'GB' };
     const token = await getToken();
 
@@ -20,7 +20,7 @@ const SpotifyRequest = async function (endpoint, method, data) {
             'Accept': 'application/json',
             'Authorization': token
         },
-        "params": params,
+        // "params": params,
         body: JSON.stringify(data)
     })
 

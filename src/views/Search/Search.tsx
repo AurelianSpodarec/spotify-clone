@@ -17,6 +17,9 @@ import { getCategoriesPlaylists, getFeaturedPlaylists, getPlaylist } from "servi
 // fetch sub-categories and create new categories list 
 
 
+// Each of this item will go to genre
+// /genre/hip-hop - list of hip hop
+
 // TODO: Maybe create something to abstract these, idealy have a name that need to be written
 const CATEGORIES_LIST_STATES = {
     fetching: 'fetching',
@@ -42,6 +45,7 @@ function Search() {
     async function fetchCategories() { 
         const res = await getBrowseCategories();
 
+        // console.log(ress)
         if(res.items.length === 0) {
             setCategoriesFetchStatus(CATEGORIES_LIST_STATES.failure)
         } else {
@@ -61,7 +65,7 @@ function Search() {
 
         if(categoriesFetchStatus === "fetching") {
             return (
-                <div key={key} className="w-60 h-24 border-2 rounded-md mx-auto mt-20">
+                <div key={key} className="w-full h-24 border-2 rounded-md mx-auto mt-20">
                 <div className="flex animate-pulse flex-row items-center h-full justify-center space-x-5">
 
                     <div className="w-12 bg-gray-300 h-12 rounded-full "></div>
@@ -76,12 +80,12 @@ function Search() {
             )
         } else {
             return (
-                <div key={key} className="text-white bg-green-700">
-                <a href={item.href}>
+                <div key={key} className="relative rounded-lg overflow-hidden">
+                <a href={item.href} className="block h-[180px]">
 
-                    <img src={item.icons[0].url} alt={item.name} />
-                    <h3>{item.name}</h3>
-
+                    <h3 className="p-4 text-white text-2xl font-bold">{item.name}</h3>
+                    <img className="absolute bottom-0 right-0 h-24 w-24" style={{ transform: "rotate(25deg) translate(18%,-2%)" }} src={item.icons[0].url} alt={item.name} />
+                 
                 </a>
                 </div>
             )    
@@ -121,15 +125,12 @@ function Search() {
 
     return (
         <div className="">
-            
-
+            <header className="px-8 pb-6 pt-10">
+                <h2 className="text-white text-2xl font-bold">Browse all</h2>
+            </header>
 
             <section className="px-8">
-                <div>
-                    <h2>Browse All</h2>
-                </div>
-
-                <div className="grid grid-cols-6">
+                <div className="grid gap-6 grid-cols-6 genre-list">
                     <RenderCategoriesListing />
                 </div>
             </section>

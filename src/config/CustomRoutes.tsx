@@ -1,5 +1,6 @@
 import * as React from "react";
 import { useRoutes } from "react-router-dom";
+import Genre from "views/Genre/Genre";
 
 import Home from "views/Home";
 import NotFound from "views/NotFound/NotFound";
@@ -18,6 +19,10 @@ function CustomRoutes() {
         {
             path: "/search",
             element: <Search />
+        },
+        {
+            path: "/genre",
+            element: <Genre />,
         }
     ]);
 
