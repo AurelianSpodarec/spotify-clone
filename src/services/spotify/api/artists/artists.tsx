@@ -3,6 +3,11 @@
 import SpotifyRequest from "services/spotify/requests/request";
 
 
+async function getArtists() {
+    const res = await SpotifyRequest('search?q=e&type=artist', "GET")
+    return res
+}
+
 async function getArtist(id:string) {
     const res = await SpotifyRequest(`artists/${id}`, "GET")
     return res
@@ -29,6 +34,7 @@ async function getArtistRelatedArtists(id:string) {
 }
  
 export {
+    getArtists,
     getArtist,
     getSeveralArtists,
     getArtistAlbums,

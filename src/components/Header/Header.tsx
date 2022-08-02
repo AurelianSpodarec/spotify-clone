@@ -6,7 +6,7 @@ function Header() {
 
     const globalNavigationHistory = global.navigationHistory;
 
-    console.log("gg", globalNavigationHistory)
+    // console.log("gg", globalNavigationHistory)
     return (
         <header className="sticky z-10 top-0 h-[64px] bg-[#121212]">
         <div className="flex px-8 py-3">

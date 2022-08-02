@@ -44,14 +44,14 @@ function Search() {
   
     async function fetchCategories() { 
         const res = await getBrowseCategories();
-
-        // console.log(ress)
-        if(res.items.length === 0) {
+        // const ress = await getCategoriesPlaylists("summer")
+        // console.log("hi", res)
+        if(res.items && res.items.length === 0) {
             setCategoriesFetchStatus(CATEGORIES_LIST_STATES.failure)
         } else {
             setCategoriesFetchStatus(CATEGORIES_LIST_STATES.success)
             setCategories(res) 
-            console.log("sub cat", res)
+            // console.log("sub cat", res)
         }
     }
 
