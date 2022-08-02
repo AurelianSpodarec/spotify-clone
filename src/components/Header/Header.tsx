@@ -1,4 +1,12 @@
+import { useDispatch, useSelector  } from "react-redux";
+
 function Header() {
+    const dispatch = useDispatch();
+    const global = useSelector((state:any ) => state.global);
+
+    const globalNavigationHistory = global.navigationHistory;
+
+    console.log("gg", globalNavigationHistory)
     return (
         <header className="sticky top-0 h-[64px] bg-[#121212]">
         <div className="flex px-8 py-3">
