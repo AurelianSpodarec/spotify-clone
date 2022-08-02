@@ -4,13 +4,13 @@ import SpotifyRequest from "services/spotify/requests/request";
 
 
 async function getBrowseCategories() {
-    const data = await SpotifyRequest("browse/categories", "GET")
-    return data.categories
+    const res = await SpotifyRequest("browse/categories", "GET")
+    return res.categories
 }
 
 async function getBrowseByID(id:string) {
-    const data = await SpotifyRequest(`browse/categories/${id}`, "GET")
-    return data
+    const res = await SpotifyRequest(`browse/categories/${id}`, "GET")
+    return res
 }
 
 export {

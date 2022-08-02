@@ -5,13 +5,13 @@ import SpotifyRequest from "services/spotify/requests/request";
 
 
 async function getCurrentUserprofile() {
-    const data = await SpotifyRequest("me", "GET")
-    return data
+    const res = await SpotifyRequest("me", "GET")
+    return res
 }
 
 async function getUserProfileByID(id:string) {
-    const data = await SpotifyRequest(`users/${id}`, "GET")
-    return data
+    const res = await SpotifyRequest(`users/${id}`, "GET")
+    return res
 }
 
 export {

@@ -4,13 +4,13 @@ import SpotifyRequest from "services/spotify/requests/request";
 
 
 async function getNewReleases() {
-    const data = await SpotifyRequest('browse/new-releases', "GET")
-    return data
+    const res = await SpotifyRequest('browse/new-releases', "GET")
+    return res
 }
 
 async function getRecommendations() {
-    const data = await SpotifyRequest('recommendations', "GET")
-    return data
+    const res = await SpotifyRequest('recommendations', "GET")
+    return res
 }
 
 export {

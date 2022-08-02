@@ -4,8 +4,8 @@ import SpotifyRequest from "services/spotify/requests/request";
 
 
 async function getAvailableGenreSeeds() {
-    const data = await SpotifyRequest("recommendations/available-genre-seeds", "GET")
-    return data;
+    const res = await SpotifyRequest("recommendations/available-genre-seeds", "GET")
+    return res;
 }
 
 export {
