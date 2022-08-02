@@ -1,4 +1,5 @@
 import react, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import { getBrowseCategories } from "services/spotify/api/categories/categories";
 import { getFeaturedPlaylists } from "services/spotify/api/playlist/playlist";
   
@@ -11,7 +12,9 @@ import { getFeaturedPlaylists } from "services/spotify/api/playlist/playlist";
 // Fetch categories
 // fetch sub-categories and create new categories list 
 
+
 function Home() {
+    const test = useSelector((state:any) => state.categories)
 
     const [categories, setCategories] = useState([])
     // const [subCategories, setSubCategories] = useState([])
@@ -54,7 +57,6 @@ function Home() {
     }
 
     function RenderCategoriesListing() {
-        console.log("Cat data", categories.items)
         if(fetchStatus === "fetching") {
             return [...Array(9)].map((_, index) => {
                 return <RenderCategoryItem key={index} fetchStatus={fetchStatus} />
@@ -76,6 +78,7 @@ function Home() {
 
     useEffect(() => {
         fetchCategories()
+        console.log("redux test", test)
     }, [fetchStatus])
 
     return (
