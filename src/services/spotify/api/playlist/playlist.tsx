@@ -54,7 +54,8 @@ async function getFeaturedPlaylists() {
 }
 
 async function getCategoriesPlaylists(id:string) {
-    const res = await SpotifyRequest('browse/categories/${id}/playlists', "GET")
+    const res = await SpotifyRequest(`browse/categories/${id}/playlists`, "GET")
+    console.log(res)
     return res
 }
 

@@ -8,12 +8,12 @@ async function getBrowseCategories() {
     return res.categories
 }
 
-async function getBrowseByID(id:string) {
+async function getBrowseCategoryByID(id:string) {
     const res = await SpotifyRequest(`browse/categories/${id}`, "GET")
     return res
 }
 
 export {
     getBrowseCategories,
-    getBrowseByID
+    getBrowseCategoryByID
 }
