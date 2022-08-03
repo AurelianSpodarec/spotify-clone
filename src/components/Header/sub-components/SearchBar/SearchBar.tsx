@@ -4,7 +4,6 @@ function SearchBar(props:any) {
 
     return (
         <div className="ml-8">
-        {/* On input set search */}
 
             <div className="flex relative">
                 <div className="absolute left-[12px] top-[9px]">
@@ -27,6 +26,7 @@ function SearchBar(props:any) {
                         </button>
                 }
             </div>
+            
         </div>
     )
 }

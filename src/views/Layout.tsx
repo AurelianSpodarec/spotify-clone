@@ -1,14 +1,14 @@
-import React from 'react';
-import { BrowserRouter } from "react-router-dom";
-
-import { Header, Footer, Nav } from 'components';
+import React, { useEffect } from 'react';
 import { CustomRoutes } from 'config';
+import { Header, Footer, Nav } from 'components';
 
+import { BrowserRouter, useLocation } from "react-router-dom";
 
 function Layout() {
 
+
     return (            
-        <BrowserRouter>
+        <BrowserRouter >
         <div className="relative bg-black h-screen overflow-hidden">
 
             <div className="relative flex flex-row">
@@ -34,7 +34,7 @@ function Layout() {
             </div>
 
         </div>
-        </BrowserRouter>
+        </BrowserRouter >
     );
 }
 

@@ -21,6 +21,8 @@ export const globalSlice = createSlice({
     reducers: {
         setHistoryItem: (state, action) => {
             state.navigationHistory.items.push(action.payload)
+            state.navigationHistory.activeIndex = state.navigationHistory.activeIndex + 1
+            // once that's set, +1 active index
         },
         nextHistoryItem: (state) => {
             if(state.navigationHistory.activeIndex <= state.navigationHistory.items.length) return

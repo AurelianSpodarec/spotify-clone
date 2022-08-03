@@ -18,6 +18,8 @@ function Search() {
 
     const dispatch = useDispatch()
     const search = useSelector((state:any) => state.search)
+    const global = useSelector((state:any ) => state.global);
+
 
     const [categories, setCategories] = useState([])
     const [categoriesFetchStatus, setCategoriesFetchStatus] = useState(CATEGORIES_LIST_STATES.fetching)
@@ -97,14 +99,15 @@ function Search() {
     }
 
     function RenderCategoriesOptions() {
+        if(!configCategories) return <></>
         return (
             <div className="sticky z-10 top-[64px] bg-[#121212]">
                 <div className="px-8 pt-1 pb-3 space-x-3">
 
                     {configCategories && configCategories.map((category, index) => {
                         return (
-                            <button onClick={() => setCategory(category)} key={index} className="inline-block py-1 px-3 rounded-2xl bg-[#232323]">
-                                <span className="text-white font-semibold text-sm">{category.name}</span>
+                            <button onClick={() => setCategory(category)} key={index} className={`${search.category === category.slug ? "text-black bg-white" : "text-white bg-[#232323]"} inline-block py-1 px-3 rounded-2xl `}>
+                                <span className="font-semibold text-sm">{category.name}</span>
                             </button>
                         )
                     })}

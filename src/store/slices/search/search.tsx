@@ -30,7 +30,7 @@ export const searchSlice = createSlice({
     initialState,
     reducers: {
         setSearchData: (state, action) => {
-            state.input = action.payload
+            state.data = action.payload
         },
         setSearchInput: (state, action) => {
             state.input = action.payload
