@@ -1,21 +1,38 @@
+import { Link } from "react-router-dom";
 
 
 function Shelf(props:any) {
-    const { children } = props;
+    const { title, titleLink, description, link, linkText, children } = props;
 
     return (
         <div>
-            <div className="justify-between">
-                <h2>Header</h2>
+            <header className="px-8 pb-6 pt-10">
+            <div className="flex justify-between">
 
-                <button>See All</button>
+                <div>
+                    <h2 className="text-white text-2xl font-bold">
+                        {titleLink ? <Link to={titleLink}>{title}</Link>
+                        : 
+                        <>{title}</>
+                        }
+                    </h2>
+                    {description && <span className="text-white">{description}</span>}
+                </div>
+ 
+                 {link && 
+                    <Link className="text-white" to={link}>
+                        {linkText}
+                    </Link>
+                 }
+
             </div>
+            </header>
 
-            <div>
+            <section className="px-8">
                 {children}
-            </div>
+            </section>
         </div>
     )
 }
 
-export default Shelf
+export default Shelf;

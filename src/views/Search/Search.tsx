@@ -1,63 +1,81 @@
+import { Shelf } from "components";
 import react, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import { getBrowseCategories, getBrowseCategoryByID } from "services/spotify/api/categories/categories";
+import { getUserSavedEpisodes } from "services/spotify/api/episodes/episodes";
 import { getAvailableGenreSeeds } from "services/spotify/api/genre/genre";
 import { getCategoriesPlaylists, getFeaturedPlaylists, getPlaylist } from "services/spotify/api/playlist/playlist";
   
 // Original URL: https://open.spotify.com/search
 //=========================================================
 
-
   // TASK: 
     // 1. Output browse/categories
     // 2. Show subsequent categories
     // 3. Add pagination
 
-// Fetch categories
-// fetch sub-categories and create new categories list 
+
+const configCategories = [
+    // {
+    //     name: "All",
+    //     slug: ""
+    // },
+    {
+        name: "Artists",
+        slug: "artists"
+    },
+    {
+        name: "Songs",
+        slug: "tracks"
+    },
+    {
+        name: "Playlists",
+        slug: ""
+    },
+    {
+        name: "Albums",
+        slug: ""
+    },
+    {
+        name: "Podcasts & Shows",
+        slug: "podcastAndEpisodes"
+    },
+    {
+        name: "Genres & Moods",
+        slug: "genres"
+    },
+    {
+        name: "Profiles",
+        slug: "users"
+    }
+]
 
 
-// Each of this item will go to genre
-// /genre/hip-hop - list of hip hop
-
-// TODO: Maybe create something to abstract these, idealy have a name that need to be written
 const CATEGORIES_LIST_STATES = {
     fetching: 'fetching',
     success: 'success',
     failure: 'failure',
 }
 
-const SUB_CATEGORIES_LIST_STATES = {
-    fetching: 'fetching',
-    success: 'success',
-    failure: 'failure',
-}
-
 function Search() {
-    const test = useSelector((state:any) => state.categories)
 
+    const dispatch = useDispatch()
+    const search = useSelector((state:any) => state.search)
+    
     const [categories, setCategories] = useState([])
     const [categoriesFetchStatus, setCategoriesFetchStatus] = useState(CATEGORIES_LIST_STATES.fetching)
 
-    const [subCategories, setSubCategories] = useState([])
-    const [subCategoriesFetchStatus, setSubCategoriesFetchStatus] = useState(SUB_CATEGORIES_LIST_STATES.fetching)
-  
+
     async function fetchCategories() { 
         const res = await getBrowseCategories();
-        // const ress = await getCategoriesPlaylists("summer")
-        // console.log("hi", res)
+        
         if(res.items && res.items.length === 0) {
             setCategoriesFetchStatus(CATEGORIES_LIST_STATES.failure)
         } else {
             setCategoriesFetchStatus(CATEGORIES_LIST_STATES.success)
             setCategories(res) 
-            // console.log("sub cat", res)
         }
-    }
-
-    async function fetchSubCategories() {
-        // const res = await getPlaylist();
-        const res = await getAvailableGenreSeeds();
     }
 
     function RenderCategoryItem(props:any) {
@@ -118,22 +136,42 @@ function Search() {
         } 
     }
 
+    function RenderCategoriesOptions() {
+        return (
+            <div className="sticky z-10 top-[64px] bg-[#121212]">
+                <div className="px-8 pt-1 pb-3 space-x-3">
+
+                    {configCategories && configCategories.map((category, index) => {
+                        return (
+                            <Link to={"/"} className="inline-block py-1 px-3 rounded-2xl bg-[#232323]">
+                                <span className="text-white font-semibold text-sm">{category.name}</span>
+                            </Link>
+                        )
+                    })}
+                    
+                </div>
+            </div>
+        )
+    }
+
     useEffect(() => {
         fetchCategories()
-        fetchSubCategories()
     }, [categoriesFetchStatus])
 
     return (
-        <div className="">
-            <header className="px-8 pb-6 pt-10">
-                <h2 className="text-white text-2xl font-bold">Browse all</h2>
-            </header>
+        <div>
 
-            <section className="px-8">
+            <RenderCategoriesOptions />
+
+            <Shelf title="Recent Searches" linkText="See all" link="/">
+
+            </Shelf>
+
+            <Shelf title="Browse all">
                 <div className="grid gap-6 grid-cols-6 genre-list">
                     <RenderCategoriesListing />
                 </div>
-            </section>
+            </Shelf>
         </div>
     )
 }
