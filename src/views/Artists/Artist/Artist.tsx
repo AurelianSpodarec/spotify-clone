@@ -3,16 +3,15 @@ import { useParams } from "react-router-dom";
 
 import { getArtist } from "services/spotify/api/artists/artists";
 
+import { numberWithCommas } from "utils/common";
+
 const ARTIST_PLAYLISTS_STATES = {
     fetching: 'fetching',
     success: 'success',
     failure: 'failure',
 }
 
-// TODO: Put this into util file
-function numberWithCommas(x:number) {
-    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-}
+
 
 function Artist(props:any) {
 
@@ -21,7 +20,7 @@ function Artist(props:any) {
     const [artist, setArtist] = useState([])
     const [artistFetchStatus, setArtistsFetchStatus] = useState(ARTIST_PLAYLISTS_STATES.fetching)
 
-     async function fetchAritst() { //@ts-ignore
+     async function fetchAritst() {
         const res = await getArtist(id)
         
          if(res && res.length === 0) {

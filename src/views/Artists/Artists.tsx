@@ -13,9 +13,7 @@ const ARTISTS_PLAYLISTS_STATES = {
 }
 
 // Put into own util file
-function capitalizeFirstLetter(string:string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
-}
+
 
 function Artists() {
 

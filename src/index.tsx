@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 
-import './styles.scss';
+import './styles/styles.scss';
 import App from 'App';
  
 import {  useDispatch, Provider } from 'react-redux'

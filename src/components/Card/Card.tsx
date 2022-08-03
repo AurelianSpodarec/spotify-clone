@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { capitalizeFirstLetter } from "utils/common";
 
 function Card(props:any) {
     const { key, item, fetchStatus, isLoading } = props;
@@ -39,7 +40,9 @@ function Card(props:any) {
 
                 <div className="py-2">
                     <h3 className="text-white font-semibold">{item.name}</h3>
-                    {/* <span className="text-gray-300">{capitalizeFirstLetter(item.type)}</span> */}
+                    {item.type && 
+                        <span className="text-gray-300">{capitalizeFirstLetter(item.type)}</span>
+                    }
                 </div>
             
             </Link>
