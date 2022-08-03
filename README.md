@@ -13,15 +13,19 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Features
 
-- Browse Genres
-- Search Feature
-  - Artists
+- Pages  
+  - Not Found (404)  
+  - Home  
+  - Search Page  
+  - Artists List  
+  - Artist Single  
 
 ### Branches
 
-`Master` is used for production
-`Staging` is used for QA 
-`Dev` is used for development
+`Master` is used for production  
+`Staging` is used for QA   
+`Dev` is used for development  
+
 
 ## Project Setup
 
@@ -29,10 +33,13 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 Some views follow concept from Laravel https://laravel.com/docs/9.x/controllers#introduction
 
-`index` - display listing
-`show` - display single listing post
+
+`index` - display listing  
+`show` - display single listing post  
 
 Usually when you need to display something like `Cars` where you have a listing of cars, and then you click it and it brings you to single page `Car`, the above will be followed.
+
+`sub-components` - It will contain specific layout/components that will be *only* used in the files and no where else. So we prevent cluttering the global component folder, as it can get long and time consuming to go over on large scale projects.
 
 
 ### Env

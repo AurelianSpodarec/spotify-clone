@@ -2,30 +2,36 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { searchRequest } from "services/spotify/api/search/search";
 
 
-export interface EditorStateInterface {
+export interface SearchStateInterface {
     input: string;
     category: string;
+    data: [],
     recentSearches: []
 }
 
-const initialState: EditorStateInterface = {
-    input: "test",
-    category: "artists",
+const initialState: SearchStateInterface = {
+    input: "d",
+    category: "artist",
+    data: [],
     recentSearches: [],
 }
 
-const fetchUserById = createAsyncThunk(
-    'users/fetchByIdStatus',
-    async (userId: number, thunkAPI) => {
-      const response = await searchRequest("test", "artists")
-      return response.data
-    }
-  )
+// const fetchSearch = createAsyncThunk(
+//     'search/fetchSearch',
+//     async (state, userId: number, thunkAPI) => {
+//       const response = await searchRequest(state.input, state.category)
+//       return response.data
+//     }
+//   )
 
+ 
 export const searchSlice = createSlice({
     name: 'search',
     initialState,
     reducers: {
+        setSearchData: (state, action) => {
+            state.input = action.payload
+        },
         setSearchInput: (state, action) => {
             state.input = action.payload
         },
@@ -40,13 +46,14 @@ export const searchSlice = createSlice({
         }
         // search
     },
-    extraReducers: (builder) => {
-        
-    }
+    // extraReducers: (state) => {
+    //     fetchSearch(state)
+    // }
 
 });
 
 export const { 
+    setSearchData,
     setSearchInput,
     clearSearchInput,
     setSearchCategory,

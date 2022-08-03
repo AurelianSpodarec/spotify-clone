@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { configCategories } from "config";
 import { getBrowseCategories, getBrowseCategoryByID } from "services/spotify/api/categories/categories";
 import { Shelf } from "components";
+import { setSearchCategory } from "store/slices/search/search";
 
 
 const CATEGORIES_LIST_STATES = {
@@ -17,7 +18,7 @@ function Search() {
 
     const dispatch = useDispatch()
     const search = useSelector((state:any) => state.search)
-    
+
     const [categories, setCategories] = useState([])
     const [categoriesFetchStatus, setCategoriesFetchStatus] = useState(CATEGORIES_LIST_STATES.fetching)
 
@@ -91,6 +92,10 @@ function Search() {
         } 
     }
 
+    function setCategory(category:any) {
+        dispatch(setSearchCategory(category.slug))
+    }
+
     function RenderCategoriesOptions() {
         return (
             <div className="sticky z-10 top-[64px] bg-[#121212]">
@@ -98,9 +103,9 @@ function Search() {
 
                     {configCategories && configCategories.map((category, index) => {
                         return (
-                            <Link to={"/"} className="inline-block py-1 px-3 rounded-2xl bg-[#232323]">
+                            <button onClick={() => setCategory(category)} key={index} className="inline-block py-1 px-3 rounded-2xl bg-[#232323]">
                                 <span className="text-white font-semibold text-sm">{category.name}</span>
-                            </Link>
+                            </button>
                         )
                     })}
                     

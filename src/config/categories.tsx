@@ -5,7 +5,7 @@ const configCategories = [
     // },
     {
         name: "Artists",
-        slug: "artists"
+        slug: "artist"
     },
     {
         name: "Songs",
@@ -13,15 +13,11 @@ const configCategories = [
     },
     {
         name: "Playlists",
-        slug: ""
+        slug: "playlist"
     },
     {
         name: "Albums",
-        slug: ""
-    },
-    {
-        name: "Podcasts & Shows",
-        slug: "podcastAndEpisodes"
+        slug: "album"
     },
     {
         name: "Genres & Moods",

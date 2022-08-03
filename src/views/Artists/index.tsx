@@ -2,8 +2,8 @@ import react, { useState, useEffect } from "react";
 
 import { TypeArtist } from "types/TypeArtist";
 import { getArtists } from "services/spotify/api/search/search";
+import { ArtistsList } from "./sub-components/index";
 
-import Card from "components/Card/Card";
 
 const ARTISTS_PLAYLISTS_STATES = {
     fetching: 'fetching',
@@ -40,35 +40,6 @@ function Artists() {
         }
     }
 
-    // TODO: Put in its own file - later on
-    // TODO: The logic of fetching, success, failre can be abstracted and re-used
-    function RenderArtistsListing() {
-        if(artistsFetchStatus === "fetching") {
-            return [...Array(9)].map((_, index) => {
-                return (
-                    <Card 
-                        key={index} 
-                        fetchStatus={artistsFetchStatus} 
-                    />
-                    
-                )
-            })
-        } else if (artistsFetchStatus === "success") {//@ts-ignore
-           return artists && artists.items.map((artist:TypeArtist, index:number) => {
-                return (
-                    <Card 
-                        key={index} //@ts-ignore
-                        item={artist} 
-                        fetchStatus={artistsFetchStatus} 
-                    />
-                )
-            })
-        } else if(artistsFetchStatus === "failure") {
-            return <h1>No categories found ;-(</h1>
-        } 
-    }
-
-
     useEffect(() => {
         fetchArtists()
     }, [artistsFetchStatus])
@@ -82,7 +53,7 @@ function Artists() {
             <section className="px-8">
             <div className="grid gap-6 grid-cols-6">
 
-                <RenderArtistsListing />
+                <ArtistsList />
 
             </div>
             </section>
