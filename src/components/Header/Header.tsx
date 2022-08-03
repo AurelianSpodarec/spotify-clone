@@ -33,7 +33,6 @@ function Header() {
         dispatch(setSearchInput(e.target.value))
     }
 
-    
     function initialLoad() {
         fetchSearch()
     }

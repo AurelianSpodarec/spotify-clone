@@ -27,9 +27,6 @@ function Artists() {
     const [artistsFetchStatus, setArtistsFetchStatus] = useState(ARTISTS_PLAYLISTS_STATES.fetching)
 
     async function fetchArtists() { 
-        // const ress = await getSeveralArtists();
-        // const res3 = await getArtist("7dGJo4pcD2V6oG8kP0tJRR")
-
         const res = await getArtists()
 
         if(res && res.length === 0) {
@@ -44,12 +41,9 @@ function Artists() {
         fetchArtists()
     }, [artistsFetchStatus])
 
-
     return (
-        <div className="">
-           
+        <div>
 
-           
             <section className="px-8">
             <div className="grid gap-6 grid-cols-6">
 
@@ -57,6 +51,7 @@ function Artists() {
 
             </div>
             </section>
+            
         </div>
     )
 }
