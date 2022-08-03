@@ -1,9 +1,10 @@
 import React from 'react';
 import { BrowserRouter } from "react-router-dom";
-import CustomRoutes from 'config/CustomRoutes';
 
 import { Header, Footer, Nav } from 'components';
- 
+import { CustomRoutes } from 'config';
+
+
 function Layout() {
 
     return (            

@@ -1,12 +1,9 @@
-import Card from "components/Card/Card";
 import react, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-
-import { getArtist, getSeveralArtists } from "services/spotify/api/artists/artists";
-import { getCategoriesPlaylists } from "services/spotify/api/playlist/playlist";
-import { getArtists } from "services/spotify/api/search/search";
 
 import { TypeArtist } from "types/TypeArtist";
+import { getArtists } from "services/spotify/api/search/search";
+
+import Card from "components/Card/Card";
 
 const ARTISTS_PLAYLISTS_STATES = {
     fetching: 'fetching',
@@ -44,6 +41,7 @@ function Artists() {
     }
 
     // TODO: Put in its own file - later on
+    // TODO: The logic of fetching, success, failre can be abstracted and re-used
     function RenderArtistsListing() {
         if(artistsFetchStatus === "fetching") {
             return [...Array(9)].map((_, index) => {

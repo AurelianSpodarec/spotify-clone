@@ -1,55 +1,10 @@
-import { Shelf } from "components";
 import react, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+
+import { configCategories } from "config";
 import { getBrowseCategories, getBrowseCategoryByID } from "services/spotify/api/categories/categories";
-import { getUserSavedEpisodes } from "services/spotify/api/episodes/episodes";
-import { getAvailableGenreSeeds } from "services/spotify/api/genre/genre";
-import { getCategoriesPlaylists, getFeaturedPlaylists, getPlaylist } from "services/spotify/api/playlist/playlist";
-  
-// Original URL: https://open.spotify.com/search
-//=========================================================
-
-  // TASK: 
-    // 1. Output browse/categories
-    // 2. Show subsequent categories
-    // 3. Add pagination
-
-
-const configCategories = [
-    // {
-    //     name: "All",
-    //     slug: ""
-    // },
-    {
-        name: "Artists",
-        slug: "artists"
-    },
-    {
-        name: "Songs",
-        slug: "tracks"
-    },
-    {
-        name: "Playlists",
-        slug: ""
-    },
-    {
-        name: "Albums",
-        slug: ""
-    },
-    {
-        name: "Podcasts & Shows",
-        slug: "podcastAndEpisodes"
-    },
-    {
-        name: "Genres & Moods",
-        slug: "genres"
-    },
-    {
-        name: "Profiles",
-        slug: "users"
-    }
-]
+import { Shelf } from "components";
 
 
 const CATEGORIES_LIST_STATES = {
@@ -69,7 +24,7 @@ function Search() {
 
     async function fetchCategories() { 
         const res = await getBrowseCategories();
-        
+
         if(res.items && res.items.length === 0) {
             setCategoriesFetchStatus(CATEGORIES_LIST_STATES.failure)
         } else {

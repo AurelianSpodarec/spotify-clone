@@ -1,12 +1,11 @@
 import React from 'react';
+import {  useDispatch, Provider } from 'react-redux'
 import ReactDOM from 'react-dom/client';
 
-import './styles/styles.scss';
-import App from 'App';
- 
-import {  useDispatch, Provider } from 'react-redux'
 import { store } from 'store/store';
+import App from 'App';
 
+import './styles/styles.scss';
 import reportWebVitals from 'utils/reportWebVitals';
 
 

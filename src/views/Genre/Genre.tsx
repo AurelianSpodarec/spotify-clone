@@ -15,13 +15,9 @@ function Genre() {
         // const res = await getCategoriesPlaylists("summer")
         // const ress = await getSeveralArtists();
         // const res3 = await getArtist("7dGJo4pcD2V6oG8kP0tJRR")
-
         const res5 = await getArtists()
-
         console.log(res5)
     }
-
-
 
     useEffect(() => {
         fetchCategoriesPlaylists()
@@ -33,7 +29,7 @@ function Genre() {
             {/* TODO: Extract header into component */}
             <header className="px-8 pb-6 pt-10 flex justify-between">
                 <h2 className="text-white text-2xl font-bold">Browse all</h2>
-                <span className="block text-xs text-gray-200 font-semibold uppercase text-white">Sell all</span>
+                <span className="block text-xs font-semibold uppercase text-white">Sell all</span>
             </header>
 
             {/* Extract sectoininto component */}

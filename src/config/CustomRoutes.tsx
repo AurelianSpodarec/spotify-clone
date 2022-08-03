@@ -5,8 +5,8 @@ import NotFound from "views/NotFound/NotFound";
 import Home from "views/Home";
 import Search from "views/Search/Search";
 
-import Artists from "views/Artists/index/index";
-import Artist from "views/Artists/show/show";
+import Artists from "views/Artists/index";
+import Artist from "views/Artists/show";
 
 import Genre from "views/Genre/Genre";
 
