@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 
 
-function Shelf(props:any) {
+function Shelf(props:Props) {
     const { title, titleLink, description, link, linkText, children } = props;
 
     return (
@@ -36,3 +36,12 @@ function Shelf(props:any) {
 }
 
 export default Shelf;
+
+interface Props {
+    title: string;
+    titleLink?: string;
+    description?: string;
+    link?: string;
+    linkText?: string;
+    children?: any;
+}

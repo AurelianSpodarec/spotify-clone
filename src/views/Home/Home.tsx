@@ -21,8 +21,6 @@ function Home() {
     return (
         <div className="">
    
-
-
             <section>
                 <div>
                     <h2>Hot Right now</h2>
@@ -33,6 +31,7 @@ function Home() {
                     List
                 </div>
             </section>
+            
         </div>
     )
 }

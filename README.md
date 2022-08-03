@@ -2,6 +2,8 @@
 
 Frontend of Spotify in ReactJS
 
+Note: Readme is in WIP
+
 ## API
 
 Used for the data: [Spotify API](https://developer.spotify.com/documentation/web-api/reference/#/)
@@ -12,15 +14,26 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 ## Features
 
 - Browse Genres
-- 
+- Search Feature
+  - Artists
 
 ### Branches
 
 `Master` is used for production
-`Stagins` is used for QA 
+`Staging` is used for QA 
 `Dev` is used for development
 
 ## Project Setup
+
+### Views
+
+Some views follow concept from Laravel https://laravel.com/docs/9.x/controllers#introduction
+
+`index` - display listing
+`show` - display single listing post
+
+Usually when you need to display something like `Cars` where you have a listing of cars, and then you click it and it brings you to single page `Car`, the above will be followed.
+
 
 ### Env
 Create .env file for development then add:

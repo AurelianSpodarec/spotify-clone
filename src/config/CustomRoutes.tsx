@@ -1,13 +1,14 @@
 import * as React from "react";
 import { useRoutes } from "react-router-dom";
-import Artist from "views/Artists/Artist/Artist";
 
-import Artists from "views/Artists/Artists";
-import Genre from "views/Genre/Genre";
-
-import Home from "views/Home";
 import NotFound from "views/NotFound/NotFound";
+import Home from "views/Home";
 import Search from "views/Search/Search";
+
+import Artists from "views/Artists/index/index";
+import Artist from "views/Artists/show/show";
+
+import Genre from "views/Genre/Genre";
 
 
 function CustomRoutes() {

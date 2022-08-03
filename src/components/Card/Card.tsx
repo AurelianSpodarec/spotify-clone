@@ -1,9 +1,24 @@
 import { Link } from "react-router-dom";
 import { capitalizeFirstLetter } from "utils/common";
 
-function Card(props:any) {
-    const { key, item, fetchStatus, isLoading } = props;
+interface CardProps {
+    key: number;
+    item?: {
+        id: number;
+        name: string;
+        type: string;
+        images: [
+            {
+                url: string;
+            }
+        ];
+    };
+    fetchStatus: string;
+}
 
+function Card(props:CardProps) {
+    const { key, item, fetchStatus } = props;
+    
     if(fetchStatus === "fetching") {
         return (
             <div key={key} className="w-full h-24 border-2 rounded-md mx-auto mt-20">
@@ -22,10 +37,10 @@ function Card(props:any) {
     } else { 
         return (
             <div key={key} className="group transition-all duration-200 ease-in  relative rounded-lg overflow-hidden bg-[#181818] hover:bg-[#282828]">
-            <Link to={`/artist/${item.id}`} state={item} className="block p-4">
+            <Link to={`/artist/${item && item.id}`} state={item && item} className="block p-4">
 
                 <div className="relative min-w-[146px]">
-                    <img className="object-cover rounded-full min-h-[146px] w-full" src={item.images[0].url} alt={`Picture of ${item.name}`}/>
+                    <img className="object-cover rounded-full min-h-[146px] w-full" src={item && item.images[0].url} alt={`Picture of ${item && item.name}`}/>
 
                     <div className="transition-all duration-300 ease-out opacity-0 group-hover:opacity-100 absolute bottom-2 right-2 translate-y-[8px] group-hover:translate-y-0">    
                         <button className="transition-all duration-300 ease-in rounded-full bg-[#1cc759] hover:bg-[#1ed560] cursor-default h-12 w-12">
@@ -39,9 +54,9 @@ function Card(props:any) {
                 </div>
 
                 <div className="py-2">
-                    <h3 className="text-white font-semibold">{item.name}</h3>
-                    {item.type && 
-                        <span className="text-gray-300">{capitalizeFirstLetter(item.type)}</span>
+                    <h3 className="text-white font-semibold">{item && item.name}</h3>
+                    {item && item.type && 
+                        <span className="text-gray-300">{capitalizeFirstLetter(item && item.type)}</span>
                     }
                 </div>
             

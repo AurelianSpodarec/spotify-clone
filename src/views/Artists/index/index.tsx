@@ -6,22 +6,30 @@ import { getArtist, getSeveralArtists } from "services/spotify/api/artists/artis
 import { getCategoriesPlaylists } from "services/spotify/api/playlist/playlist";
 import { getArtists } from "services/spotify/api/search/search";
 
+import { TypeArtist } from "types/TypeArtist";
+
 const ARTISTS_PLAYLISTS_STATES = {
     fetching: 'fetching',
     success: 'success',
     failure: 'failure',
 }
 
-// Put into own util file
-
+interface ArtistList {
+    href: string;
+    items: [],
+    limit: number;
+    next?: string;
+    offset?: number;
+    previous?: string;
+    total: number; 
+}
 
 function Artists() {
 
-    const [artists, setArtist] = useState([])
+    const [artists, setArtist] = useState<ArtistList[]>([])
     const [artistsFetchStatus, setArtistsFetchStatus] = useState(ARTISTS_PLAYLISTS_STATES.fetching)
 
     async function fetchArtists() { 
-        // const res = await getArtists("summer")
         // const ress = await getSeveralArtists();
         // const res3 = await getArtist("7dGJo4pcD2V6oG8kP0tJRR")
 
@@ -31,13 +39,11 @@ function Artists() {
             setArtistsFetchStatus(ARTISTS_PLAYLISTS_STATES.failure)
         } else {
             setArtistsFetchStatus(ARTISTS_PLAYLISTS_STATES.success)
-
             setArtist(res.artists) 
         }
     }
 
-   
-
+    // TODO: Put in its own file - later on
     function RenderArtistsListing() {
         if(artistsFetchStatus === "fetching") {
             return [...Array(9)].map((_, index) => {
@@ -50,10 +56,10 @@ function Artists() {
                 )
             })
         } else if (artistsFetchStatus === "success") {//@ts-ignore
-           return artists && artists.items.map((artist:{}, index:number) => {
+           return artists && artists.items.map((artist:TypeArtist, index:number) => {
                 return (
                     <Card 
-                        key={index} 
+                        key={index} //@ts-ignore
                         item={artist} 
                         fetchStatus={artistsFetchStatus} 
                     />
