@@ -1,6 +1,7 @@
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { setClickedPlay, setClickedPlayOpen } from "store/slices/global/globalSlice";
+import { setRecentSearchItem } from "store/slices/search/search";
 import { capitalizeFirstLetter } from "utils/common";
 
 interface CardProps {
@@ -22,6 +23,15 @@ function Card(props:CardProps) {
     const { key, item, fetchStatus } = props;
 
     const dispatch = useDispatch()
+
+    // Add to recent list if it doesnt exist anymore
+
+
+    function handleClick() {
+        // dispatch()
+        dispatch(setRecentSearchItem(item))
+    }
+
 
     function handlePlayClick(e:any) {
         e.preventDefault()
@@ -46,11 +56,17 @@ function Card(props:CardProps) {
         )
     } else { 
         return (
-            <div key={key} className="group transition-all duration-200 ease-in  relative rounded-lg overflow-hidden bg-[#181818] hover:bg-[#282828]">
+            <div key={key} onClick={() => handleClick()} className="group transition-all duration-200 ease-in  relative rounded-lg overflow-hidden bg-[#181818] hover:bg-[#282828]">
             <Link to={`/artist/${item && item.id}`} state={item && item} className="block p-4">
 
-                <div className="relative min-w-[146px]">
-                    <img className="object-cover rounded-full min-h-[146px] w-full" src={item && item.images[0].url} alt={`Picture of ${item && item.name}`}/>
+                <div className="relative h-[151px]">
+
+                    {/* If image undefined, have a black circle instead */}
+                    {item && item.images[0] ?
+                        <img className="object-cover rounded-full h-[151px] w-full" src={item && item.images && item.images[0].url} alt={`Picture of ${item && item.name}`}/>
+                        :
+                        <div className="rounded-full h-[151px] w-full bg-black"></div>
+                    }
 
                     <div className="transition-all duration-300 ease-out opacity-0 group-hover:opacity-100 absolute bottom-2 right-2 translate-y-[8px] group-hover:translate-y-0">    
                         <button onClick={(e) => handlePlayClick(e)} className="transition-all duration-300 ease-in rounded-full bg-[#1cc759] hover:bg-[#1ed560] cursor-default h-12 w-12">

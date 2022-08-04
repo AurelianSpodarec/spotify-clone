@@ -7,7 +7,7 @@ import { setSearchCategory } from "store/slices/search/search";
 import { configCategories } from "config";
 import { getBrowseCategories, getBrowseCategoryByID } from "services/spotify/api/categories/categories";
 
-import { Card2, Shelf } from "components";
+import { Card, Card2, Shelf } from "components";
 import { ArtistsList } from "views/Artists/sub-components/index";
 
 const CATEGORIES_LIST_STATES = {
@@ -96,27 +96,55 @@ function Search() {
         fetchCategories()
     }, [categoriesFetchStatus])
 
+    // console.log("wooooooooooo", search.recentSearches)
+
+    function RenderRecentSearch() {
+        return (
+            <Shelf title="Recent Searches" linkText="See all" link="/recent-searches">
+            <div className="grid gap-6 grid-cols-6">
+
+                {search.recentSearches.slice(0, 5).map((item:any) => {
+                        return (
+                            <Card 
+                                key={item.id}
+                                item={item}
+                                fetchStatus="success"
+                            />
+                        )
+                    })
+                }
+
+            </div>
+            </Shelf>
+        )
+    }
+
     return (
         <div>
 
             <RenderCategoriesOptions />
-{/* 
-            <Shelf title="Recent Searches" linkText="See all" link="/">
+       
+            {search.category === "artist" && 
+                <Shelf>
+                        {/*@ts-ignore  */}
+                    <ArtistsList data={search.data} fetchStatus="success"/>
+                </Shelf>
+            }
+            
+            {search.category === "" &&
+            <>
 
-            </Shelf> */}
-        
-            
-            <Shelf>
-                {/* @ts-ignore - later */}
-                <ArtistsList data={search.data} fetchStatus="success"/>
-            </Shelf>
-            
-            {search.category === "" && 
+                {search && search.recentSearches.length !== 0 && 
+                    <RenderRecentSearch />
+                }
+
                 <Shelf title="Browse all">
                     <div className="grid gap-6 grid-cols-6 genre-list">
                         <RenderCategoriesListing />
                     </div>
                 </Shelf>
+                
+            </>
             }
         </div>
     )

@@ -43,6 +43,14 @@ export const searchSlice = createSlice({
         },
         clearSearchCategory: (state) => {
             state.category = "";
+        },
+        setRecentSearchItem: (state, action) => {
+            // if item already exists, don't push it 
+            //@ts-ignore
+            state.recentSearches.push(action.payload)
+        },
+        deleteRecentSearchItemByID: (state, action) => {
+            // state.recentSearches.find
         }
         // search
     },
@@ -57,7 +65,9 @@ export const {
     setSearchInput,
     clearSearchInput,
     setSearchCategory,
-    clearSearchCategory
+    clearSearchCategory,
+    setRecentSearchItem,
+    deleteRecentSearchItemByID
 } = searchSlice.actions;
 
 export default searchSlice.reducer;
