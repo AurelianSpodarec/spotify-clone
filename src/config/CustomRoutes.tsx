@@ -49,6 +49,10 @@ function CustomRoutes() {
         {
             path: "/genre",
             element: <Genre />,
+        },
+        {
+            path: "/genre/:id",
+            element: <Genre />,
         }
     ]);
 

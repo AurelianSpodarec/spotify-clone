@@ -10,7 +10,7 @@ function RecentSearches() {
         <Shelf title="Recent searches" linkText="Clear recent searches">
         <div className="grid gap-6 grid-cols-6">
 
-            {search.recentSearches.slice(0, 6).map((item:any) => {
+            {search.recentSearches.map((item:any) => {
                     return (
                         <Card 
                             key={item.id}

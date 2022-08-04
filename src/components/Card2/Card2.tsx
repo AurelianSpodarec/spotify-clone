@@ -1,9 +1,11 @@
+import { Link } from "react-router-dom";
 
 interface Card2Props {
     key: number;
     fetchStatus: string;
     href: string;
     item: {
+        id: string;
         href: string;
         name: string;
         icons: [
@@ -16,7 +18,7 @@ interface Card2Props {
 
 function Card2(props:Card2Props) {
     const { key, item, fetchStatus } = props;
-
+    console.log(item)
     if(fetchStatus === "fetching") {
         return (
             <div key={key} className="w-full h-24 border-2 rounded-md mx-auto mt-20">
@@ -35,12 +37,12 @@ function Card2(props:Card2Props) {
     } else {
         return (
             <div key={key} className="relative rounded-lg overflow-hidden">
-            <a href={item && item.href} className="block h-[180px]">
+            <Link to={`/genre/${item.id}`} className="block h-[180px]">
 
                 <h3 className="p-4 text-white text-2xl font-bold">{item.name}</h3>
                 <img className="absolute bottom-0 right-0 h-24 w-24" style={{ transform: "rotate(25deg) translate(18%,-2%)" }} src={item.icons[0].url} alt={item.name} />
              
-            </a>
+            </Link>
             </div>
         )    
     }

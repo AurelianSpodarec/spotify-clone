@@ -49,7 +49,7 @@ function Search() {
     function RenderCategoriesOptions() {
         if(!configCategories) return <></>
         return (
-            <div className="sticky z-10 top-[64px] bg-[#121212]">
+            <div className="sticky z-30 top-[64px] bg-[#121212]">
                 <div className="px-8 pt-1 pb-3 space-x-3">
 
                     {configCategories && configCategories.map((category, index) => {
