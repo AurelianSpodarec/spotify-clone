@@ -9,6 +9,7 @@ import Artists from "views/Artists/index";
 import Artist from "views/Artists/show";
 
 import Genre from "views/Genre/Genre";
+import RecentSearches from "views/RecentSearches/RecentSearches";
 
 
 function CustomRoutes() {
@@ -24,6 +25,10 @@ function CustomRoutes() {
         {
             path: "/search",
             element: <Search />,
+        },
+        {
+            path: "/recent-searches",
+            element: <RecentSearches />
         },
         {
             path: "/search/:input/",

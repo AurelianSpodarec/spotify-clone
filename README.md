@@ -15,10 +15,15 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 - Pages  
   - Not Found (404)  
-  - Home  
+  - Home
   - Search Page  
-  - Artists List  
-  - Artist Single  
+    - Basic search
+    - Navigate though categories
+    - Recent Searches (persist state comming soon)
+
+- Author Card
+- Not logged in user, when clicking green play button will see a modal
+
 
 ### Branches
 

@@ -103,11 +103,12 @@ function Search() {
             <Shelf title="Recent Searches" linkText="See all" link="/recent-searches">
             <div className="grid gap-6 grid-cols-6">
 
-                {search.recentSearches.slice(0, 5).map((item:any) => {
+                {search.recentSearches.slice(0, 6).map((item:any) => {
                         return (
                             <Card 
                                 key={item.id}
                                 item={item}
+                                canDelete={true}
                                 fetchStatus="success"
                             />
                         )

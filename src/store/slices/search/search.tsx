@@ -29,28 +29,30 @@ export const searchSlice = createSlice({
     name: 'search',
     initialState,
     reducers: {
-        setSearchData: (state, action) => {
-            state.data = action.payload
+        setSearchData: (state, { payload }) => {
+            state.data = payload
         },
-        setSearchInput: (state, action) => {
-            state.input = action.payload
+        setSearchInput: (state, { payload }) => {
+            state.input = payload
         },
         clearSearchInput: (state) => {
             state.input = ""
         },
-        setSearchCategory: (state, action) => {
-            state.category = action.payload
+        setSearchCategory: (state, { payload }) => {
+            state.category = payload
         },
         clearSearchCategory: (state) => {
             state.category = "";
         },
-        setRecentSearchItem: (state, action) => {
-            // if item already exists, don't push it 
-            //@ts-ignore
-            state.recentSearches.push(action.payload)
+        setRecentSearchItem: (state, { payload }) => {
+            const inArray = state.recentSearches.find((item:any) => item.id === payload.id);
+            if(inArray) return
+             //@ts-ignore
+            state.recentSearches.unshift(payload) 
         },
-        deleteRecentSearchItemByID: (state, action) => {
-            // state.recentSearches.find
+        removeRecentSearchItem: (state, { payload }) => {
+          // @ts-ignore
+           state.recentSearches.splice(state.recentSearches.findIndex((item) => item.id === payload.id), 1);
         }
         // search
     },
@@ -67,7 +69,7 @@ export const {
     setSearchCategory,
     clearSearchCategory,
     setRecentSearchItem,
-    deleteRecentSearchItemByID
+    removeRecentSearchItem
 } = searchSlice.actions;
 
 export default searchSlice.reducer;

@@ -1,11 +1,12 @@
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { setClickedPlay, setClickedPlayOpen } from "store/slices/global/globalSlice";
-import { setRecentSearchItem } from "store/slices/search/search";
+import { removeRecentSearchItem, setRecentSearchItem } from "store/slices/search/search";
 import { capitalizeFirstLetter } from "utils/common";
 
 interface CardProps {
     key: number;
+    canDelete?: boolean;
     item?: {
         id: number;
         name: string;
@@ -20,18 +21,19 @@ interface CardProps {
 }
 
 function Card(props:CardProps) {
-    const { key, item, fetchStatus } = props;
+    const { key, item, fetchStatus, canDelete } = props;
 
     const dispatch = useDispatch()
 
-    // Add to recent list if it doesnt exist anymore
-
-
-    function handleClick() {
-        // dispatch()
-        dispatch(setRecentSearchItem(item))
+    function handleRemove(e:any) {
+        e.preventDefault();
+        e.stopPropagation()
+        dispatch(removeRecentSearchItem(item))
     }
 
+    function handleClick() {
+        dispatch(setRecentSearchItem(item))
+    }
 
     function handlePlayClick(e:any) {
         e.preventDefault()
@@ -58,6 +60,14 @@ function Card(props:CardProps) {
         return (
             <div key={key} onClick={() => handleClick()} className="group transition-all duration-200 ease-in  relative rounded-lg overflow-hidden bg-[#181818] hover:bg-[#282828]">
             <Link to={`/artist/${item && item.id}`} state={item && item} className="block p-4">
+
+                {canDelete && 
+                    <button className="absolute top-2 right-2 cursor-default rounded-full bg-black/30 p-1.5 z-10 hover:scale-110" onClick={(e) => handleRemove(e)} aria-label="Remove">
+                        <svg className="text-white fill-white" role="img" height="16" width="16" viewBox="0 0 16 16">
+                            <path d="M1.47 1.47a.75.75 0 011.06 0L8 6.94l5.47-5.47a.75.75 0 111.06 1.06L9.06 8l5.47 5.47a.75.75 0 11-1.06 1.06L8 9.06l-5.47 5.47a.75.75 0 01-1.06-1.06L6.94 8 1.47 2.53a.75.75 0 010-1.06z"></path>
+                        </svg>
+                    </button>
+                }
 
                 <div className="relative h-[151px]">
 
