@@ -1,6 +1,5 @@
 import react, { useState, useEffect } from "react";
 
-import { TypeArtist } from "types/TypeArtist";
 import { getArtists } from "services/spotify/api/search/search";
 import { ArtistsList } from "./sub-components/index";
 
@@ -45,11 +44,11 @@ function Artists() {
         <div>
 
             <section className="px-8">
-            <div className="grid gap-6 grid-cols-6">
+            
 
-                <ArtistsList />
+                {/* <ArtistsList /> */}
 
-            </div>
+             
             </section>
             
         </div>

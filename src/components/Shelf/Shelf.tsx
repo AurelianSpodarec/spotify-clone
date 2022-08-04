@@ -6,27 +6,30 @@ function Shelf(props:Props) {
 
     return (
         <div>
-            <header className="px-8 pb-6 pt-10">
-            <div className="flex justify-between">
 
-                <div>
-                    <h2 className="text-white text-2xl font-bold">
-                        {titleLink ? <Link to={titleLink}>{title}</Link>
-                        : 
-                        <>{title}</>
-                        }
-                    </h2>
-                    {description && <span className="text-white">{description}</span>}
+            {title &&
+                <header className="px-8 pb-6 pt-10">
+                <div className="flex justify-between">
+
+                    <div>
+                        <h2 className="text-white text-2xl font-bold">
+                            {titleLink ? <Link to={titleLink}>{title}</Link>
+                            : 
+                            <>{title}</>
+                            }
+                        </h2>
+                        {description && <span className="text-white">{description}</span>}
+                    </div>
+    
+                    {link && 
+                        <Link className="text-white" to={link}>
+                            {linkText}
+                        </Link>
+                    }
+
                 </div>
- 
-                 {link && 
-                    <Link className="text-white" to={link}>
-                        {linkText}
-                    </Link>
-                 }
-
-            </div>
-            </header>
+                </header>
+            }
 
             <section className="px-8">
                 {children}
@@ -38,7 +41,7 @@ function Shelf(props:Props) {
 export default Shelf;
 
 interface Props {
-    title: string;
+    title?: string;
     titleLink?: string;
     description?: string;
     link?: string;

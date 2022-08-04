@@ -10,8 +10,8 @@ export interface SearchStateInterface {
 }
 
 const initialState: SearchStateInterface = {
-    input: "d",
-    category: "artist",
+    input: "",
+    category: "",
     data: [],
     recentSearches: [],
 }

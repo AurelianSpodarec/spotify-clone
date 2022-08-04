@@ -1,11 +1,14 @@
 import react, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
+
 import { useDispatch, useSelector } from "react-redux";
+import { setSearchCategory } from "store/slices/search/search";
 
 import { configCategories } from "config";
 import { getBrowseCategories, getBrowseCategoryByID } from "services/spotify/api/categories/categories";
+
 import { Card2, Shelf } from "components";
-import { setSearchCategory } from "store/slices/search/search";
+import { ArtistsList } from "views/Artists/sub-components/index";
 
 const CATEGORIES_LIST_STATES = {
     fetching: 'fetching',
@@ -21,13 +24,11 @@ function Search() {
     const search = useSelector((state:any) => state.search)
     const global = useSelector((state:any ) => state.global);
 
-    
-    console.log("Page search", userId)
-
     const [categories, setCategories] = useState([])
     const [categoriesFetchStatus, setCategoriesFetchStatus] = useState(CATEGORIES_LIST_STATES.fetching)
-
-
+    
+    console.log("Page search", search)
+    
     async function fetchCategories() { 
         const res = await getBrowseCategories();
     
@@ -44,7 +45,7 @@ function Search() {
     }
 
 
-    // Categories nav
+    // Categories nav - on click, re-fetch 
     function RenderCategoriesOptions() {
         if(!configCategories) return <></>
         return (
@@ -65,6 +66,7 @@ function Search() {
     }
 
     // Categories Listing/ Browse All
+    // TODO: Don't show categories, except `All` untill the user has typed something in the searchBar
     function RenderCategoriesListing() {
         if(categoriesFetchStatus === "fetching") {
             return [...Array(9)].map((_, index) => {
@@ -98,16 +100,24 @@ function Search() {
         <div>
 
             <RenderCategoriesOptions />
-
+{/* 
             <Shelf title="Recent Searches" linkText="See all" link="/">
 
+            </Shelf> */}
+        
+            
+            <Shelf>
+                {/* @ts-ignore - later */}
+                <ArtistsList data={search.data} fetchStatus="success"/>
             </Shelf>
-
-            <Shelf title="Browse all">
-                <div className="grid gap-6 grid-cols-6 genre-list">
-                    <RenderCategoriesListing />
-                </div>
-            </Shelf>
+            
+            {search.category === "" && 
+                <Shelf title="Browse all">
+                    <div className="grid gap-6 grid-cols-6 genre-list">
+                        <RenderCategoriesListing />
+                    </div>
+                </Shelf>
+            }
         </div>
     )
 }

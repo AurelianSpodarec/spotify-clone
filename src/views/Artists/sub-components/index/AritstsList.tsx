@@ -1,29 +1,45 @@
+import { TypeArtist } from "types/TypeArtist";
+
 import Card from "components/Card/Card"
 
-function ArtistsList(artistsFetchStatus:any) {
-    if(artistsFetchStatus === "fetching") {
-        return [...Array(9)].map((_, index) => {
-            return (
+function ArtistsList(props:any) {
+    const { data, fetchStatus } = props
+
+    // console.log("Arists list", data.artists.items)
+    if(fetchStatus === "fetching") {
+    return [...Array(9)].map((_, index) => {
+        return (
+            <div className="grid gap-6 grid-cols-6">
                 <Card 
                     key={index} 
-                    fetchStatus={artistsFetchStatus} 
+                    fetchStatus={fetchStatus} 
                 />
+            </div>
+            )
+        })
+    } else if (fetchStatus === "success") {//@ts-ignore
+        return (
+            <div className="grid gap-6 grid-cols-6">
+             {data.artists && data.artists.items.map((data:TypeArtist, index:number) => {
+                return (
+                    
+                        <Card 
+                            key={index} //@ts-ignore
+                            item={data} 
+                            fetchStatus={fetchStatus} 
+                        />
                 
-            )
-        })
-    } else if (artistsFetchStatus === "success") {//@ts-ignore
-       return artists && artists.items.map((artist:TypeArtist, index:number) => {
-            return (
-                <Card 
-                    key={index} //@ts-ignore
-                    item={artist} 
-                    fetchStatus={artistsFetchStatus} 
-                />
-            )
-        })
-    } else if(artistsFetchStatus === "failure") {
-        return <h1>No categories found ;-(</h1>
+                    )
+                })}
+            </div>
+        )
+    } else if(fetchStatus === "failure") {
+        return (
+            <h1 className="text-red-500">No categories found ;-(</h1>
+        )
     } 
+        
+
 }
 
 export default ArtistsList;
