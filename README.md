@@ -39,6 +39,8 @@ Some views follow concept from Laravel https://laravel.com/docs/9.x/controllers#
 
 Usually when you need to display something like `Cars` where you have a listing of cars, and then you click it and it brings you to single page `Car`, the above will be followed.
 
+In terms of naming the classes in those files, possible convention would be `List_Artist` to display a list of artists. `Show_Artist` to display one artist. Then if this convention is followed, it will also gain a support with VS code I believe with the `List_x` or such and just a way for a larger team to work with having one convention, which is all subjective anyway at the end of the day.
+
 `sub-components` - It will contain specific layout/components that will be *only* used in the files and no where else. So we prevent cluttering the global component folder, as it can get long and time consuming to go over on large scale projects.
 
 

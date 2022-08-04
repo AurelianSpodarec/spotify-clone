@@ -15,10 +15,15 @@ function Header() {
 
     const location = useLocation();
 
-    console.log("global", global)
+    // console.log("global", global)
+
+    // TODO UX
+    // When user clicks `All`, search will be ereased 
+    // When user goes to input, preselect 'artists' as default, because spotify api is meh
 
     async function fetchSearch() {
         const res = await searchRequest(search.input, search.category);
+        console.log("header", res)
         dispatch(setSearchData(res))
     }
 
@@ -27,13 +32,16 @@ function Header() {
     }
 
     function onValueChange(e:any) {
-        // Debounce every 300ms
+        // Debounce every 300ms, use something like load-dash or do this in redux
         dispatch(setSearchInput(e.target.value))
+
+        const nextURL = `http://localhost:3000/search/${e.target.value}/${search.category}`;
+        // add category at the end, if it exists
+        window.history.replaceState(null, "", nextURL)
     }
 
     useEffect(() => {
         fetchSearch()
-        // console.log("Hi")
     }, [search.input])
 
     useEffect(() => {
@@ -46,13 +54,13 @@ function Header() {
         
             <HistoryButtons />
 
-            {location.pathname === "/search" && 
+            {/* {location.pathname === "/search" &&  */}
                 <SearchBar 
                     search={search} 
                     onValueChange={onValueChange} 
                     handleClearSearch={handleClearSearch} 
                 />
-            }
+            {/* } */}
 
         </div>
         </header>

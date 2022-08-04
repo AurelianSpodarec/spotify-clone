@@ -1,8 +1,8 @@
 const configCategories = [
-    // {
-    //     name: "All",
-    //     slug: ""
-    // },
+    {
+        name: "All",
+        slug: ""
+    },
     {
         name: "Artists",
         slug: "artist"

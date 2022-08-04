@@ -1,12 +1,11 @@
 import react, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import { configCategories } from "config";
 import { getBrowseCategories, getBrowseCategoryByID } from "services/spotify/api/categories/categories";
-import { Shelf } from "components";
+import { Card2, Shelf } from "components";
 import { setSearchCategory } from "store/slices/search/search";
-
 
 const CATEGORIES_LIST_STATES = {
     fetching: 'fetching',
@@ -16,10 +15,14 @@ const CATEGORIES_LIST_STATES = {
 
 function Search() {
 
+    let { userId } = useParams();
+
     const dispatch = useDispatch()
     const search = useSelector((state:any) => state.search)
     const global = useSelector((state:any ) => state.global);
 
+    
+    console.log("Page search", userId)
 
     const [categories, setCategories] = useState([])
     const [categoriesFetchStatus, setCategoriesFetchStatus] = useState(CATEGORIES_LIST_STATES.fetching)
@@ -27,7 +30,7 @@ function Search() {
 
     async function fetchCategories() { 
         const res = await getBrowseCategories();
-
+    
         if(res.items && res.items.length === 0) {
             setCategoriesFetchStatus(CATEGORIES_LIST_STATES.failure)
         } else {
@@ -36,68 +39,12 @@ function Search() {
         }
     }
 
-    function RenderCategoryItem(props:any) {
-        const { key, item, fetchStatus } = props;
-
-        if(categoriesFetchStatus === "fetching") {
-            return (
-                <div key={key} className="w-full h-24 border-2 rounded-md mx-auto mt-20">
-                <div className="flex animate-pulse flex-row items-center h-full justify-center space-x-5">
-
-                    <div className="w-12 bg-gray-300 h-12 rounded-full "></div>
-
-                    <div className="flex flex-col space-y-3">
-                        <div className="w-36 bg-gray-300 h-6 rounded-md "></div>
-                        <div className="w-24 bg-gray-300 h-6 rounded-md "></div>
-                    </div>
-
-                </div>
-                </div>
-            )
-        } else {
-            return (
-                <div key={key} className="relative rounded-lg overflow-hidden">
-                <a href={item.href} className="block h-[180px]">
-
-                    <h3 className="p-4 text-white text-2xl font-bold">{item.name}</h3>
-                    <img className="absolute bottom-0 right-0 h-24 w-24" style={{ transform: "rotate(25deg) translate(18%,-2%)" }} src={item.icons[0].url} alt={item.name} />
-                 
-                </a>
-                </div>
-            )    
-        }
-        
-    }
-
-    function RenderCategoriesListing() {
-        if(categoriesFetchStatus === "fetching") {
-            return [...Array(9)].map((_, index) => {
-                return (
-                    <RenderCategoryItem 
-                        key={index} 
-                        fetchStatus={categoriesFetchStatus} 
-                    />
-                )
-            })
-        } else if (categoriesFetchStatus === "success") {//@ts-ignore
-            return categories && categories.items.map((category:{}, index:number) => {
-                return (
-                    <RenderCategoryItem 
-                        key={index}
-                        item={category} 
-                        fetchStatus={categoriesFetchStatus}
-                    />
-                )
-            })
-        } else if(categoriesFetchStatus === "failure") {
-            return <h1>No categories found ;-(</h1>
-        } 
-    }
-
     function setCategory(category:any) {
         dispatch(setSearchCategory(category.slug))
     }
 
+
+    // Categories nav
     function RenderCategoriesOptions() {
         if(!configCategories) return <></>
         return (
@@ -106,7 +53,7 @@ function Search() {
 
                     {configCategories && configCategories.map((category, index) => {
                         return (
-                            <button onClick={() => setCategory(category)} key={index} className={`${search.category === category.slug ? "text-black bg-white" : "text-white bg-[#232323]"} inline-block py-1 px-3 rounded-2xl `}>
+                            <button onClick={() => setCategory(category)} key={index} className={`${search.category === category.slug ? "text-black bg-white" : "text-white bg-[#232323]"} ${index === 0 && "mr-4"} inline-block py-1 px-3 rounded-2xl `}>
                                 <span className="font-semibold text-sm">{category.name}</span>
                             </button>
                         )
@@ -115,6 +62,32 @@ function Search() {
                 </div>
             </div>
         )
+    }
+
+    // Categories Listing/ Browse All
+    function RenderCategoriesListing() {
+        if(categoriesFetchStatus === "fetching") {
+            return [...Array(9)].map((_, index) => {
+                return (//@ts-ignore
+                    <Card2 
+                        key={index} 
+                        fetchStatus={categoriesFetchStatus} 
+                    />
+                )
+            })
+        } else if (categoriesFetchStatus === "success") {//@ts-ignore
+            return categories && categories.items.map((category:{}, index:number) => {
+                return (
+                    <Card2 
+                        key={index}//@ts-ignore
+                        item={category} 
+                        fetchStatus={categoriesFetchStatus}
+                    />
+                )
+            })
+        } else if(categoriesFetchStatus === "failure") {
+            return <h1>No categories found ;-(</h1>
+        } 
     }
 
     useEffect(() => {

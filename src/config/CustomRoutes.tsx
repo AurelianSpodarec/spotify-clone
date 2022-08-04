@@ -23,7 +23,15 @@ function CustomRoutes() {
         },
         {
             path: "/search",
-            element: <Search />
+            element: <Search />,
+        },
+        {
+            path: "/search/:input/",
+            element: <Search />,
+        },
+        {
+            path: "/search/:input/:category",
+            element: <Search />,
         },
         {
             path: "/artists",

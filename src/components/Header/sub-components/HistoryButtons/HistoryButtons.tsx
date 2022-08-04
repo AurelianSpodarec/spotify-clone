@@ -9,6 +9,7 @@ function HistoryButtons() {
 
     const globalHistory = global.navigationHistory;
 
+    // TODO
     let locationnn = useLocation();
     const location = window.location.pathname
 
@@ -19,13 +20,13 @@ function HistoryButtons() {
     // }, [locationnn])
 
 
-    console.log(globalHistory)
+    // console.log(globalHistory)
     function onPrev() {
-        dispatch(prevHistoryItem())
+        // dispatch(prevHistoryItem())
     }
 
     function onNext() {
-        dispatch(nextHistoryItem())
+        // dispatch(nextHistoryItem())
     }
 
     return (
