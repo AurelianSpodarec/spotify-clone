@@ -1,13 +1,17 @@
 import React from 'react'; 
 
+import PortalPlay from 'components/PortalPlay/PortalPlay';
 import Layout from 'views/Layout';
 
 
-// add path name to items in redux for history
-
-
 function App() {
-    return <Layout />
+    return (
+        <>
+            <PortalPlay />
+            
+            <Layout />
+        </>
+    )
 }
 
 export default App;
