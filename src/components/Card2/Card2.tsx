@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 
 interface Card2Props {
-    key: number;
+    key: string | number;
     fetchStatus: string;
     href: string;
     item: {
@@ -18,7 +18,7 @@ interface Card2Props {
 
 function Card2(props:Card2Props) {
     const { key, item, fetchStatus } = props;
-    console.log(item)
+    // console.log(item)
     if(fetchStatus === "fetching") {
         return (
             <div key={key} className="w-full h-24 border-2 rounded-md mx-auto mt-20">

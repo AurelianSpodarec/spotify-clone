@@ -16,9 +16,10 @@ const SpotifyRequest = async function (endpoint, method, data) {
         method,
         "credentials": 'omit',
         "headers": {
+            'Authorization': `Bearer ${token}`,
+            // 'Authorization': token,
             'Content-Type': 'application/json',
             'Accept': 'application/json',
-            'Authorization': token
         },
         // "params": params,
         body: JSON.stringify(data)

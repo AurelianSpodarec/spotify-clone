@@ -2,9 +2,9 @@
 //=============================================================
 import SpotifyRequest from "services/spotify/requests/request";
 
+const token = localStorage.getItem('authToken');
 
-
-async function getCurrentUserprofile() {
+async function getCurrentUserProfile() {
     const res = await SpotifyRequest("me", "GET")
     return res
 }
@@ -15,6 +15,6 @@ async function getUserProfileByID(id:string) {
 }
 
 export {
-    getCurrentUserprofile,
+    getCurrentUserProfile,
     getUserProfileByID
 }

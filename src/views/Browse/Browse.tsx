@@ -11,19 +11,19 @@ import { Card, Card2, Shelf } from "components";
 import { ArtistsList } from "views/Artists/sub-components/index";
 import { getCurrentUserProfile } from "services/spotify/api/profile/profile";
 
+// SPOTCHIP TEST FILE
+
+// TODO: Add TS support for the states
 const CATEGORIES_LIST_STATES = {
     fetching: 'fetching',
     success: 'success',
     failure: 'failure',
 }
 
-function Search() {
-
-    let { userId } = useParams();
+function Browse() {
 
     const dispatch = useDispatch()
     const search = useSelector((state:any) => state.search)
-    const global = useSelector((state:any ) => state.global);
 
     const [categories, setCategories] = useState([])
     const [categoriesFetchStatus, setCategoriesFetchStatus] = useState(CATEGORIES_LIST_STATES.fetching)
@@ -40,31 +40,62 @@ function Search() {
             setCategories(res) 
         }
     }
+ 
 
-    function setCategory(category:any) {
-        dispatch(setSearchCategory(category.slug))
-    }
+    function RenderPagination(props:any) {
+        const { data } = props;
+        if(!data) <></>
 
+        let currentPage = 1;
+        let totalPages = Math.ceil(data.total / data.limit)
+        
+        let showNumberOfPages = 3;
+        
 
-    // Categories nav - on click, re-fetch 
-    function RenderCategoriesOptions() {
-        if(!configCategories) return <></>
+        function lastPage() {
+
+        }
+
+        function prevPage() {
+
+        }
+
+        function nextPage() {
+
+        }
+
+        // console.log(data)
+
+        // display all pages
+
+        // console.log(totalPages)
+    
+        function pageLinks() {
+            let a = Array.from({ length: totalPages }, (_, index) => <div key={index}>{index + 1}</div>);
+            console.log("aaa", a)
+            return a;
+        }
+      
         return (
-            <div className="sticky z-30 top-[64px] bg-[#121212]">
-                <div className="px-8 pt-1 pb-3 space-x-3">
+            <div className="text-white space-x-2">
+                <button>
+                    Prev
+                </button>
 
-                    {configCategories && configCategories.map((category, index) => {
-                        return (
-                            <button onClick={() => setCategory(category)} key={index} className={`${search.category === category.slug ? "text-black bg-white" : "text-white bg-[#232323]"} ${index === 0 && "mr-4"} inline-block py-1 px-3 rounded-2xl `}>
-                                <span className="font-semibold text-sm">{category.name}</span>
-                            </button>
-                        )
-                    })}
-                    
-                </div>
+                    <div>
+                        {pageLinks()}
+                        <span>...</span>
+                        <span>{totalPages - 1}</span>
+                        <Link to="search">{totalPages}</Link>
+                    </div>
+
+                <button>
+                    Next
+                </button>
             </div>
         )
     }
+ 
 
     // Categories Listing/ Browse All
     // TODO: Don't show categories, except `All` untill the user has typed something in the searchBar
@@ -97,57 +128,17 @@ function Search() {
         fetchCategories()
     }, [categoriesFetchStatus])
 
-    function RenderRecentSearch() {
-        return (
-            <Shelf title="Recent Searches" linkText="See all" link="/recent-searches">
-            <div className="grid gap-6 grid-cols-6">
-
-                {search.recentSearches.slice(0, 6).map((item:any) => {
-                        return (
-                            <Card 
-                                key={item.id}
-                                item={item}
-                                canDelete={true}
-                                fetchStatus="success"
-                            />
-                        )
-                    })
-                }
-
-            </div>
-            </Shelf>
-        )
-    }
-
     return (
         <div>
-
-            <RenderCategoriesOptions />
-       
-            {search.category === "artist" && 
-                <Shelf>
-                        {/*@ts-ignore  */}
-                    <ArtistsList data={search.data} fetchStatus="success"/>
-                </Shelf>
-            }
-            
-            {search.category === "" &&
-            <>
-
-                {search && search.recentSearches.length !== 0 && 
-                    <RenderRecentSearch />
-                }
-
-                <Shelf title="Browse all">
-                    <div className="grid gap-6 grid-cols-6 genre-list">
-                        <RenderCategoriesListing />
-                    </div>
-                </Shelf>
-                
-            </>
-            }
+ 
+            <Shelf title="Browse all">
+                <div className="grid gap-6 grid-cols-6 genre-list">
+                    <RenderCategoriesListing />
+                </div>
+            </Shelf>   
+          
         </div>
     )
 }
 
-export default Search;
+export default Browse;
